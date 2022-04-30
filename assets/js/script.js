@@ -4,12 +4,6 @@ var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
 var questionIndex = 0
 
-// timer running 
-
-//start button clicks and displays first question
-
-//generate question text and four answer buttons
-
 var questionBank = [
     {
         question: "Commonly used data values do not include:",
@@ -34,7 +28,6 @@ var questionBank = [
 ]
 
 
-// runs on click event listener, remove start button, append question with answer buttons, start timer
 var startQuiz = function(){
     startButton.remove();
 
