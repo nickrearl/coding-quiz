@@ -1,5 +1,5 @@
 ## Coding Quiz
-A shot simple quiz to text knowledge of javascript. utilizing web APIs for funcionality
+A short simple quiz to text knowledge of javascript. utilizing web APIs for funcionality
 
 ## Purpose
 To test knowledge of javascript both for someone who takes the quiz, and my own proficiency through the app's development. Incorrect answers will subtract time from the timer, and the final scores will be determined by how much time is left on the timer, and stored in local storage. The following mock up was provided as a starting point.
