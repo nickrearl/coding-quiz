@@ -8,6 +8,7 @@ var endGameDiv = document.createElement("div")
 var endGameCalled = false
 var timeLeft = 60
 var questionIndex = 0
+var scoreCard = []
 
 var questionBank = [
     {
@@ -173,7 +174,7 @@ var checkAnswer = function(event){
 var endGame = function(){
     endGameCalled = true
     endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is: " + timeLeft + "</h3>" + 
-    "<form> <label for='initials'>Enter your initials:</label> <input type='text' name= 'initials' id='initials'> <button>Submit</button> </form>"
+    "<form> <label for='initials'>Enter your initials:</label> <input type='text' name='initials'> <button>Submit</button> </form>"
 
     questionDiv.remove()
 
@@ -186,7 +187,14 @@ var endGame = function(){
 var recordScore = function(){
     event.preventDefault()
 
-    console.log("high score")
+    var scoreCardObj = [
+        initials = document.querySelector("input[name='initials']").value,  
+        score = timeLeft
+    ]
+
+    scoreCard.push(scoreCardObj)
+
+    localStorage.setItem("scoreCard", JSON.stringify(scoreCard))
 
     window.location.href = "./highscores.html"
 }
