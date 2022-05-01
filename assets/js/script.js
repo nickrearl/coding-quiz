@@ -3,7 +3,6 @@ var quizSection = document.getElementById("quiz-section")
 var introPage = document.getElementById("intro-page")
 var timerDiv = document.getElementById("timer")
 var questionDiv = document.createElement("div")
-var answerDiv = document.createElement("div")
 var endGameDiv = document.createElement("div")
 var endGameCalled = false
 var timeLeft = 60
@@ -102,12 +101,17 @@ var startQuiz = function(){
 
 
 var renderQuestion = function() {
+    var questionDisplay = document.createElement("h2")
 
-    questionDiv.innerHTML = questionBank[questionIndex].question
+    questionDisplay.textContent = questionBank[questionIndex].question
 
-    quizSection.appendChild(questionDiv)
+    questionDiv.appendChild(questionDisplay)
+
+    questionDiv.setAttribute("class", "question")
 
     renderCoices()
+
+    quizSection.appendChild(questionDiv)
 }
 
 var renderCoices = function() {
@@ -121,11 +125,12 @@ var renderCoices = function() {
     
         answerButton.textContent = questionBank[questionIndex].answers[i]
 
-        answerDiv.appendChild(answerButton)
+        questionDiv.appendChild(answerButton)
     } 
 
+        questionDiv.setAttribute("class", "answer-section")
 
-    quizSection.appendChild(answerDiv)
+    quizSection.appendChild(questionDiv)
 
 }
 
@@ -134,8 +139,7 @@ var checkAnswer = function(event){
     var nextQuestionHelper = function(){
         questionIndex++
 
-        questionDiv.remove()
-        answerDiv.innerHTML = ""
+        questionDiv.innerHTML = ""
 
         renderQuestion()
     }
@@ -159,14 +163,14 @@ var checkAnswer = function(event){
 
     else if (event.target.dataset.answer === questionBank[questionIndex].correctAnswer){
         nextQuestionHelper()
-        answerDiv.appendChild(rightAnswer)
+        questionDiv.appendChild(rightAnswer)
     }
 
 
     else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer) {
         timeLeft = timeLeft-10
         nextQuestionHelper()
-        answerDiv.appendChild(wrongAnswer)
+        questionDiv.appendChild(wrongAnswer)
 
     }
 }
@@ -176,14 +180,13 @@ var endGame = function(){
     endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is: " + timeLeft + "</h3>" + 
     "<form> <label for='initials'>Enter your initials:</label> <input type='text' name='initials'> <button>Submit</button> </form>"
 
-    questionDiv.remove()
+    endGameDiv.setAttribute("class", "end-game")
 
-    answerDiv.remove()
+    questionDiv.remove()
 
     quizSection.appendChild(endGameDiv)
 
 }
-
 var recordScore = function(){
     event.preventDefault()
 
@@ -202,4 +205,4 @@ var recordScore = function(){
 
 endGameDiv.addEventListener("submit", recordScore)
 startButton.addEventListener("click", startQuiz)
-answerDiv.addEventListener("click", checkAnswer)
+questionDiv.addEventListener("click", checkAnswer)

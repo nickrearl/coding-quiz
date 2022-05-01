@@ -1,0 +1,62 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+header a {
+    text-decoration: none;
+    color: blueviolet;
+}
+
+#quiz-section {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+button:hover{
+    background-color: violet;
+}
+
+#intro-page {
+    text-align: center;
+}
+
+.end-game {
+    text-align: center;
+}
+
+.question {
+    text-align: center;
+    display: list-item;
+}
+
+.answer-feedback {
+    font-size: 24px;
+    margin-top: 20px;
+    color: gray;
+    border-top: 2px solid gray;
+}
+
+.high-score-display{
+    text-align: center;
+}
+
+.high-score-display ul{
+    list-style: none;
+}
+
+.high-score-display ul li {
+    font-size: 20px;
+    text-align: center;
+}
