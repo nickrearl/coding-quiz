@@ -1,7 +1,10 @@
 var startButton = document.getElementById("start-button")
 var quizSection = document.getElementById("quiz-section")
+var introPage = document.getElementById("intro-page")
+var timerDiv = document.getElementById("timer")
 var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
+var endGameDiv = document.createElement("div")
 var questionIndex = 0
 
 var questionBank = [
@@ -24,12 +27,42 @@ var questionBank = [
             "//",
         ],
         correctAnswer: "()"
-    }
+    },
+    {
+        question: "Arrays in Javascript can be used to store ________?",
+        answers: [
+            "numbers and strings",
+            "other arrays",
+            "booleans",
+            "all of the above",
+        ],
+        correctAnswer: "all of the above"
+    },
+    {
+        question: "String values must be enclosed within ______ When being assigned to variables.",
+        answers: [
+            "commas",
+            "curly brackets",
+            "quotes",
+            "parenthesis",
+        ],
+        correctAnswer: "quotes"
+    },
+    {
+        question: "A useful tool for printing content to the debugger during development is:",
+        answers: [
+            "JavaScript",
+            "terminal/bash",
+            "for loops",
+            "console.log",
+        ],
+        correctAnswer: "console.log"
+    },
 ]
 
 
 var startQuiz = function(){
-    startButton.remove();
+    introPage.remove();
 
     renderQuestion()
 
@@ -76,30 +109,53 @@ var checkAnswer = function(event){
         renderQuestion()
     }
 
+    var wrongAnswer = document.createElement("div")
+    wrongAnswer.setAttribute("class", "answer-feedback")
+    wrongAnswer.innerHTML = "Incorrect"
+
+    var rightAnswer = document.createElement("div")
+    rightAnswer.setAttribute("class", "answer-feedback")
+    rightAnswer.innerHTML = "Correct"
+
     if (questionIndex === questionBank.length-1){
-        //end game sequence
-        console.log("end")
+        endGame()
     }
 
     else if (event.target.dataset.answer === questionBank[questionIndex].correctAnswer){
         nextQuestionHelper()
+        answerDiv.appendChild(rightAnswer)
     }
-    // pull the next question w/answers display positive message
+
 
     else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer) {
         nextQuestionHelper()
-    //display negtative message subtract from timer move to next question
+        answerDiv.appendChild(wrongAnswer)
     }
+}
+
+var endGame = function(){
+    endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is:" +"</h3>" + 
+    "<form> <label for='initials'>Enter your initials:</label> <input type='text' name= 'initials' id='initials'> <button>Submit</button> </form>"
 
 
+
+    questionDiv.remove()
+
+    answerDiv.remove()
+
+    quizSection.appendChild(endGameDiv)
 
 }
 
+var recordScore = function(){
+    event.preventDefault()
 
-//correct answer button click shows next question and displays positive message
-//incorrect click subtracts from timer, and displays negative
+    console.log("high score")
 
-//
+    window.location.href = "./highscores.html"
+}
 
+
+endGameDiv.addEventListener("submit", recordScore)
 startButton.addEventListener("click", startQuiz)
 answerDiv.addEventListener("click", checkAnswer)
