@@ -5,6 +5,7 @@ var timerDiv = document.getElementById("timer")
 var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
 var endGameDiv = document.createElement("div")
+var timeLeft = 75
 var questionIndex = 0
 
 var questionBank = [
@@ -60,9 +61,31 @@ var questionBank = [
     },
 ]
 
+var quizTimer = function(){
+
+    var timerCount = setInterval(function(){
+        if (timeLeft > 1){
+            timerDiv.textContent = "Time: " + timeLeft
+            timeLeft--
+        }
+
+        else if (timeLeft === 1){
+            timerDiv.textContent = "Time: " + timeLeft
+            timeLeft--
+        }
+
+        else {
+            clearInterval(timerCount)
+            
+            endGame()
+        }
+    }, 1000)
+}
 
 var startQuiz = function(){
     introPage.remove();
+
+    quizTimer()
 
     renderQuestion()
 
@@ -117,6 +140,7 @@ var checkAnswer = function(event){
     rightAnswer.setAttribute("class", "answer-feedback")
     rightAnswer.innerHTML = "Correct"
 
+
     if (questionIndex === questionBank.length-1){
         endGame()
     }
@@ -130,14 +154,15 @@ var checkAnswer = function(event){
     else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer) {
         nextQuestionHelper()
         answerDiv.appendChild(wrongAnswer)
+        timeLeft = timeLeft-5
     }
 }
 
 var endGame = function(){
-    endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is:" +"</h3>" + 
+    endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is: " + timeLeft + "</h3>" + 
     "<form> <label for='initials'>Enter your initials:</label> <input type='text' name= 'initials' id='initials'> <button>Submit</button> </form>"
 
-
+    clearInterval(timerCount)
 
     questionDiv.remove()
 
