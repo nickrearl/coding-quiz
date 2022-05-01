@@ -67,8 +67,8 @@ var quizTimer = function(){
 
     var timerCount = setInterval(function(){
         if(endGameCalled){
-            clearInterval(timerCount)
             timerDiv.textContent = "Time: " + timeLeft
+            clearInterval(timerCount)
         }
         
         else if (timeLeft > 1){
@@ -147,8 +147,12 @@ var checkAnswer = function(event){
     rightAnswer.setAttribute("class", "answer-feedback")
     rightAnswer.innerHTML = "Correct"
 
+    if (questionIndex === questionBank.length-1 && event.target.dataset.answer != questionBank[questionIndex].correctAnswer){
+        timeLeft = timeLeft-10
+        endGame()
+    }
 
-    if (questionIndex === questionBank.length-1){
+    else if (questionIndex === questionBank.length-1){
         endGame()
     }
 
@@ -159,9 +163,10 @@ var checkAnswer = function(event){
 
 
     else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer) {
+        timeLeft = timeLeft-10
         nextQuestionHelper()
         answerDiv.appendChild(wrongAnswer)
-        timeLeft = timeLeft-5
+
     }
 }
 

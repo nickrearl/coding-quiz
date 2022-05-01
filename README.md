@@ -6,7 +6,7 @@ To test knowledge of javascript both for someone who takes the quiz, and my own 
 ![alt](./assets/images/mock-up.gif)
 
 ## Live site
-LINK HERE ONCE DEPLOYED
+https://nickrearl.github.io/coding-quiz/
 
 ## Credits
 This is being developed as part of MSU's coding bootcamp program. The assignment and mock up are copyrighted as follows: © 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
