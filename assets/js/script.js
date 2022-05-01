@@ -5,7 +5,8 @@ var timerDiv = document.getElementById("timer")
 var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
 var endGameDiv = document.createElement("div")
-var timeLeft = 75
+var endGameCalled = false
+var timeLeft = 60
 var questionIndex = 0
 
 var questionBank = [
@@ -62,9 +63,15 @@ var questionBank = [
 ]
 
 var quizTimer = function(){
+    timerDiv.textContent = "Time: " + timeLeft
 
     var timerCount = setInterval(function(){
-        if (timeLeft > 1){
+        if(endGameCalled){
+            clearInterval(timerCount)
+            timerDiv.textContent = "Time: " + timeLeft
+        }
+        
+        else if (timeLeft > 1){
             timerDiv.textContent = "Time: " + timeLeft
             timeLeft--
         }
@@ -76,7 +83,7 @@ var quizTimer = function(){
 
         else {
             clearInterval(timerCount)
-            
+            timerDiv.textContent = "Time: " + timeLeft
             endGame()
         }
     }, 1000)
@@ -159,10 +166,9 @@ var checkAnswer = function(event){
 }
 
 var endGame = function(){
+    endGameCalled = true
     endGameDiv.innerHTML = "<h2> All Done! </h2>" + "<h3> Your final score is: " + timeLeft + "</h3>" + 
     "<form> <label for='initials'>Enter your initials:</label> <input type='text' name= 'initials' id='initials'> <button>Submit</button> </form>"
-
-    clearInterval(timerCount)
 
     questionDiv.remove()
 
